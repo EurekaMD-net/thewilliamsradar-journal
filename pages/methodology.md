@@ -74,6 +74,40 @@ The scanner runs every **Friday after US market close** (18:00 Mexico City time)
 
 Data source: Alpha Vantage — adjusted weekly closes.
 
+#### Universe Selection Criteria
+
+Tickers are not selected by individual screening — they enter the universe by belonging to a sector ETF, then pass two additional filters:
+
+| Filter | Rule | Rationale |
+| ------ | ---- | --------- |
+| **ETF membership** | Must be a current constituent of one of the 13 SPDR sector ETFs tracked by the Radar | Provides sector context and liquidity floor — ETF inclusion already screens for minimum market cap and trading volume |
+| **Market cap rank** | Top 20 holdings by market cap per sector (source: SSGA official ETF holdings, updated April 2026) | Eliminates micro-cap and illiquid names; focuses on tickers with 25+ years of clean weekly price history for backtesting |
+| **Tier 1 outlier** | HR ≥ 73% and max drawdown < 5% in the Phase 2 backtest (2001–2026, minimum 20 S1 signals) | Identifies the highest signal-quality names; Tier 1 tickers are highlighted in every journal entry |
+
+**What is explicitly NOT used as a selection filter:**
+
+- Dividend yield — high-yield tickers are not preferred over low-yield ones
+- Price-to-earnings or valuation multiples — no fundamental screening
+- Analyst ratings or price targets
+- Recent momentum or trend — tickers are not added or removed based on recent performance
+
+The universe is **additive** — tickers are added weekly from the expansion schedule (rank 21+ per sector, in order of sector quality), and discarded only when an S1 signal is ≥ 20 weeks old with no AO confirmation, or following an extraordinary structural break (e.g., bankruptcy filing).
+
+---
+
+### Ranging Filter
+
+Before a ticker is evaluated for S1/S2 signals, it passes through a **ranging filter**:
+
+- Calculated as: price range over the last **12 weeks** < **15% of the 12-week average price**
+- If a ticker is lateralizing (low volatility, compressed range), **it is excluded from all signal categories** — S1, S2 Pure, and S2 Degraded
+- Rationale: AO/AC signals in ranging markets produce false positives at a much higher rate than in trending markets
+
+Two additional price context fields are computed but do **not** exclude a ticker — they inform ranking only:
+
+- **nearLows**: whether the current price is within 15% of its 104-week low (2-year range)
+- **pricePercentile**: where the current price sits within its 104-week high/low range (0% = at lows, 100% = at highs)
+
 ---
 
 ### Weekly Output
