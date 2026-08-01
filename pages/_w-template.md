@@ -26,6 +26,28 @@ Result key: ✓ positive · ✗ negative · — still watching (S2 not yet confi
 
 ---
 
+## Exit Analysis — W{NN-1} Signals
+
+> 🔴 MODEL OUTPUT — Did the {X} names that lost signal exit on real appreciation or noise?
+
+{Optional narrative sentence summarizing the pattern of exits this week.}
+
+| Ticker | Δ% | Exit Reason | Verdict |
+|--------|----|-------------|---------|
+| **XXX** | +0.0% | AC crossed positive | ✅ Real appreciation |
+| **XXX** | +0.0% | AC crossed positive | ⚠️ Range — move without conviction |
+| **XXX** | -0.0% | AC crossed positive | ❌ False technical signal — AC technical, price declined |
+| **XXX** | -0.0% | AC turned negative | 🔴 Breakdown — deterioration, not resolution |
+| **XXX** | -0.0% | Lateralization filter | ❌ Deterioration — sideways with decline |
+
+**Summary: {X} real appreciation ({X}%) · {X} range ({X}%) · {X} without price support or deterioration ({X}%)**
+
+<!-- NOTE: This section MUST be written in English. All headers, column names, verdict labels,
+     and narrative text are English only. Do NOT translate Exit Reason, Verdict, Summary,
+     or any table content into Spanish. -->
+
+---
+
 ## Portfolio Tracker
 
 > 🟢 LIVE POSITIONS — Actual entries with real or paper capital. Updated every week.
